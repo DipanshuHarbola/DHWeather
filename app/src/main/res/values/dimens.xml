@@ -1,0 +1,28 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">12dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="city_marginTop">16dp</dimen>
+    <dimen name="update_textSize">13sp</dimen>
+    <dimen name="icon_width">60dp</dimen>
+    <dimen name="icon_height">60dp</dimen>
+    <dimen name="icon_marginLeft">20dp</dimen>
+    <dimen name="icon_marginTop">90dp</dimen>
+    <dimen name="temp_textSize">60sp</dimen>
+    <dimen name="temp_marginTop">70dp</dimen>
+    <dimen name="temp_marginLeft">20dp</dimen>
+    <dimen name="desc_textSize">20sp</dimen>
+    <dimen name="desc_marginTop">30dp</dimen>
+    <dimen name="details_textSize">20sp</dimen>
+    <dimen name="details_marginTop">38dp</dimen>
+    <dimen name="deg_textSize">30sp</dimen>
+    <dimen name="deg_marginTop">10dp</dimen>
+
+    <dimen name="for_icon_marginTop">30dp</dimen>
+    <dimen name="for_icon_marginLeft">15dp</dimen>
+    <dimen name="max_min_temp_textSize">24sp</dimen>
+    <dimen name="max_min_temp_marginTop">10dp</dimen>
+    <dimen name="max_min_temp_marginLeft">30dp</dimen>
+    <dimen name="for_desc_marginTop">12dp</dimen>
+    <dimen name="for_desc_marginLeft">6dp</dimen>
+</resources>
