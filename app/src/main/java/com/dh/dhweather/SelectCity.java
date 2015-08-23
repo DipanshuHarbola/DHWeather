@@ -17,7 +17,7 @@ public class SelectCity
 
     public String getCity()
     {
-        return this.preferences.getString(SHARED_PREF_CITY_KEY_NAME, "New Delhi,IN");
+        return this.preferences.getString(SHARED_PREF_CITY_KEY_NAME, "Delhi,IN");
     }
     public void setCity(String paramString)
     {
