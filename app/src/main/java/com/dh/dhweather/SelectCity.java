@@ -1,8 +1,6 @@
 package com.dh.dhweather;
 
-/**
- * Created by Deepanshu on 8/12/2015.
- */
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 

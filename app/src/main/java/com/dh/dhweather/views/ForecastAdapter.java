@@ -1,10 +1,8 @@
 package com.dh.dhweather.views;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class ForecastAdapter extends ArrayAdapter<WeatherForecast> {
@@ -34,7 +33,6 @@ public class ForecastAdapter extends ArrayAdapter<WeatherForecast> {
         this.context=context;
         this.resource= resource;
         this.objects= objects;
-        Log.e("inside","Fragment2_adapter");
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -58,7 +56,7 @@ public class ForecastAdapter extends ArrayAdapter<WeatherForecast> {
             holder = (ViewHolder)convertView.getTag();
         }
         new DownloadImage(holder.icon).execute(objects.get(position).getIcon());
-        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("EEEE");
+        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("EEEE", Locale.getDefault());
         String todayIs = simpleDateFormat.format(new Date(objects.get(position).getDay() * 1000));
         DateFormat df = DateFormat.getDateInstance();
         String date = df.format(new Date(objects.get(position).getDay() * 1000));
@@ -78,7 +76,7 @@ public class ForecastAdapter extends ArrayAdapter<WeatherForecast> {
         public ImageView icon;
     }
 
-    public  class DownloadImage extends AsyncTask<String,Void,Bitmap>{
+    public  class DownloadImage extends AsyncTask<String,Void,Drawable>{
         ImageView bmImage;
 
         public DownloadImage(ImageView imageView){
@@ -86,21 +84,21 @@ public class ForecastAdapter extends ArrayAdapter<WeatherForecast> {
         }
 
         @Override
-        protected Bitmap doInBackground(String... params) {
-            Bitmap bitmap = null;
+        protected Drawable doInBackground(String... params) {
+            Drawable drawable = null;
             try{
                 InputStream in = new java.net.URL("http://openweathermap.org/img/w/"+params[0]+".png").openStream();
-                bitmap = BitmapFactory.decodeStream(in);
+                drawable = Drawable.createFromStream(in , "openweathermap");
             }catch (Exception e){
                 e.printStackTrace();
             }
-            return bitmap;
+            return drawable;
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap) {
+        protected void onPostExecute(Drawable drawable) {
 
-            bmImage.setImageBitmap(bitmap);
+            bmImage.setImageDrawable(drawable);
         }
     }
 }

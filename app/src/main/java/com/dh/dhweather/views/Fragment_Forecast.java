@@ -3,7 +3,6 @@ package com.dh.dhweather.views;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -23,7 +22,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Fragment_Forecast extends Fragment {
-    //TextView text;
     ListView listView;
     ArrayList<WeatherForecast> list;
 
@@ -31,7 +29,6 @@ public class Fragment_Forecast extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_forecast, container, false);
-        //text = (TextView)rootView.findViewById(R.id.section_2);
         listView = (ListView)rootView.findViewById(R.id.listView);
         list = new ArrayList<>();
         updateCity(new SelectCity(getActivity()).getCity());
@@ -39,8 +36,6 @@ public class Fragment_Forecast extends Fragment {
     }
 
     public void updateCity(String city) {
-        //text.setText(city);
-        Log.e("inside", "update method " + city);
         new WeatherForecastTask().execute(city);
     }
 
@@ -54,7 +49,6 @@ public class Fragment_Forecast extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        //int id = menu.getItem();
         if (menu != null){
             menu.findItem(R.id.newCity).setVisible(false);
         }
@@ -64,12 +58,11 @@ public class Fragment_Forecast extends Fragment {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            //WeatherForecast weather = new WeatherForecast();
             final JSONObject json = WeatherDataGet.getForecastJson(params[0]);
             try {
                 if (json!=null) {
                     list = WeatherDataSet.getWeatherForecastData(json);
-                }Log.e("inside","Fragment2_doinback");
+                }
                 return true;
 
             } catch (JSONException e) {
@@ -85,7 +78,6 @@ public class Fragment_Forecast extends Fragment {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            Log.e("inside", "Fragment2_onpost");
             if (aBoolean == null){
                 Toast.makeText(getActivity(),"No Data Found",Toast.LENGTH_LONG).show();
             }

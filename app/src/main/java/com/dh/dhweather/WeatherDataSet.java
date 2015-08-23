@@ -9,10 +9,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/**
- * Created by Deepanshu on 8/12/2015.
- */
+
 public class WeatherDataSet {
+    // Current Weather Data
     public static Weather getWeatherData(JSONObject json) throws JSONException {
         Weather weather = new Weather();
         weather.setCity(json.getString("name"));
@@ -32,7 +31,7 @@ public class WeatherDataSet {
         return weather;
     }
 
-    // Weather Forecast data
+    // Weather Forecast Data
     public static ArrayList<WeatherForecast> getWeatherForecastData(JSONObject json) throws JSONException {
         ArrayList<WeatherForecast> forecastList = new ArrayList<>();
         JSONArray jsonArray = json.getJSONArray("list");

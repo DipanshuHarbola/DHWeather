@@ -1,8 +1,6 @@
 package com.dh.dhweather.beans;
 
-/**
- * Created by Deepanshu on 6/9/2015.
- */
+
 public class WeatherForecast {
     private long day;
     private String icon;

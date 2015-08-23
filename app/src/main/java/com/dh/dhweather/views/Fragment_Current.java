@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +26,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * Created by Deepanshu on 8/12/2015.
- */
 public class Fragment_Current extends Fragment {
     private TextView cityField;
     private TextView updateField;
@@ -67,7 +63,6 @@ public class Fragment_Current extends Fragment {
             try {
                 weather = WeatherDataSet.getWeatherData(json);
 
-                // Let's retrieve the icon
                 weather.image=loadImageFromWeb("http://openweathermap.org/img/w/"+weather.getIcon()+".png");
 
             } catch (JSONException e) {
@@ -75,7 +70,6 @@ public class Fragment_Current extends Fragment {
             }
 
 
-            Log.e("doInBackground() is", "Ok");
             if (json==null)
                 Toast.makeText(getActivity(), getActivity().getString(R.string.place_not_found), Toast.LENGTH_LONG).show();
             return weather;
@@ -109,15 +103,16 @@ public class Fragment_Current extends Fragment {
     }
 
     private Drawable loadImageFromWeb(String url) {
+        Drawable drawable;
         try
         {
             InputStream is = (InputStream) new URL(url).getContent();
-            Drawable drawable = Drawable.createFromStream(is, "src name");
-            //Toast.makeText(new MainActivity(),"inside loadingimg method\n"+url,Toast.LENGTH_LONG).show();
-            return drawable;
+            drawable = Drawable.createFromStream(is, "openweathermap");
+
         } catch (Exception e) {
             return null;
         }
+        return drawable;
     }
 
     public void changeCity(String city){
