@@ -3,9 +3,10 @@
 
     <string name="title_section1">Current</string>
     <string name="title_section2">Upcoming</string>
-    <string name="place_not_found">Sorry.. Place Not Found</string>
+    <string name="place_not_found">DHWeather - Sorry..Place Not Found</string>
     <string name="action_settings">Settings</string>
     <string name="location">Change City</string>
     <string name="forecasting">Upcoming Days</string>
     <string name="unit">℃</string>
+    <string name="refresh">Refresh</string>
 </resources>

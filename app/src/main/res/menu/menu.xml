@@ -1,7 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".WeatherActivity">
-    <item android:id="@+id/newCity" android:title="@string/location"
-        android:icon="@mipmap/ic_action_location_found" app:showAsAction="always|withText"/>
+
+    <item
+        android:id="@+id/refresh"
+        android:icon="@mipmap/ic_action_refresh"
+        android:title="@string/refresh"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/newCity"
+        android:icon="@mipmap/ic_action_location_found"
+        android:title="@string/location"
+        app:showAsAction="always" />
 
 </menu>

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dh.dhweather.R;
 import com.dh.dhweather.SelectCity;
@@ -34,6 +33,7 @@ public class Fragment_Current extends Fragment {
     private TextView descField;
     private TextView detailsField;
     private TextView deg;
+    private TextView notFound;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +46,7 @@ public class Fragment_Current extends Fragment {
         descField = (TextView) rootView.findViewById(R.id.descriptionView);
         detailsField = (TextView) rootView.findViewById(R.id.detailsView);
         deg = (TextView) rootView.findViewById(R.id.degree);
+        notFound = (TextView)rootView.findViewById(R.id.notFound);
         updateCity(new SelectCity(getActivity()).getCity());
         return rootView;
     }
@@ -54,68 +55,73 @@ public class Fragment_Current extends Fragment {
         new WeatherAsyncTask().execute(city);
     }
 
-    public class WeatherAsyncTask extends AsyncTask<String,Void,Weather>{
-
-        @Override
-        protected Weather doInBackground(String... params) {
-            Weather weather = new Weather();
-            final JSONObject json = WeatherDataGet.getWeatherJSON(params[0]);
-            try {
-                weather = WeatherDataSet.getWeatherData(json);
-
-                weather.image=loadImageFromWeb("http://openweathermap.org/img/w/"+weather.getIcon()+".png");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-            if (json==null)
-                Toast.makeText(getActivity(), getActivity().getString(R.string.place_not_found), Toast.LENGTH_LONG).show();
-            return weather;
-        }
-
-        @Override
-        protected void onPostExecute(Weather weather) {
-            super.onPostExecute(weather);
-
-            try {
-                cityField.setText(weather.getCity() + ", " + weather.getCountry());
-
-
-                iconField.setImageDrawable(weather.image);
-
-                descField.setText(weather.getDescription().toUpperCase(Locale.UK));
-                detailsField.setText("Humidity: " + weather.getHumidity() + "%" + "\n" +
-                        "Pressure: " + weather.getPressure() + " hpa");
-
-                tempField.setText(String.format("%.2f", weather.getTemprature()));
-                deg.setText(R.string.unit);
-
-                DateFormat df = DateFormat.getDateTimeInstance();
-                String updatedOn = df.format(new Date(weather.getDateTime()*1000));
-                updateField.setText("Last Updated: " + updatedOn);
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-    }
-
     private Drawable loadImageFromWeb(String url) {
         Drawable drawable;
         try
         {
             InputStream is = (InputStream) new URL(url).getContent();
             drawable = Drawable.createFromStream(is, "openweathermap");
-
+            return drawable;
         } catch (Exception e) {
-            return null;
+            e.printStackTrace();
         }
-        return drawable;
+        return null;
     }
 
     public void changeCity(String city){
         updateCity(city);
+    }
+
+    public class WeatherAsyncTask extends AsyncTask<String,Void,Weather>{
+
+        @Override
+        protected Weather doInBackground(String... params) {
+            Weather weather;
+            final JSONObject json = WeatherDataGet.getWeatherJSON(params[0]);
+            try {
+                if (json!=null){
+                    weather = WeatherDataSet.getWeatherData(json);
+
+                    weather.image=loadImageFromWeb("http://openweathermap.org/img/w/" + weather.getIcon() + ".png");
+                    return weather;
+                }
+            } catch (JSONException e) {
+                return null;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Weather weather) {
+            super.onPostExecute(weather);
+
+            if (weather == null){
+                notFound.setVisibility(View.VISIBLE);
+                notFound.setText(getActivity().getText(R.string.place_not_found));
+            }
+            else{
+                notFound.setVisibility(View.GONE);
+                try {
+                    cityField.setText(weather.getCity() + ", " + weather.getCountry());
+
+
+                    iconField.setImageDrawable(weather.image);
+
+                    descField.setText(weather.getDescription().toUpperCase(Locale.UK));
+                    detailsField.setText("Humidity: " + weather.getHumidity() + "%" + "\n" +
+                            "Pressure: " + weather.getPressure() + " hpa");
+
+                    tempField.setText(String.format("%.2f", weather.getTemprature()));
+                    deg.setText(R.string.unit);
+
+                    DateFormat df = DateFormat.getDateTimeInstance();
+                    String updatedOn = df.format(new Date(weather.getDateTime()*1000));
+                    updateField.setText("Last Updated: " + updatedOn);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

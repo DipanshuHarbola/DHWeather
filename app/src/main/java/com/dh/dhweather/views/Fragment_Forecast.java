@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.dh.dhweather.R;
 import com.dh.dhweather.SelectCity;
@@ -22,13 +22,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Fragment_Forecast extends Fragment {
-    ListView listView;
     ArrayList<WeatherForecast> list;
+    private TextView textView;
+    private TextView notFound;
+    private ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_forecast, container, false);
+        textView = (TextView) rootView.findViewById(R.id.forecasting);
+        notFound = (TextView) rootView.findViewById(R.id.notFound);
         listView = (ListView)rootView.findViewById(R.id.listView);
         list = new ArrayList<>();
         updateCity(new SelectCity(getActivity()).getCity());
@@ -54,6 +58,10 @@ public class Fragment_Forecast extends Fragment {
         }
     }
 
+    public void changeCity() {
+        updateCity(new SelectCity(getActivity()).getCity());
+    }
+
     public class WeatherForecastTask extends AsyncTask<String,Void,Boolean> {
 
         @Override
@@ -62,11 +70,12 @@ public class Fragment_Forecast extends Fragment {
             try {
                 if (json!=null) {
                     list = WeatherDataSet.getWeatherForecastData(json);
+                    return true;
                 }
-                return true;
+
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                return false;
             }
 
 
@@ -78,22 +87,18 @@ public class Fragment_Forecast extends Fragment {
         @Override
         protected void onPostExecute(Boolean aBoolean) {
             super.onPostExecute(aBoolean);
-            if (aBoolean == null){
-                Toast.makeText(getActivity(),"No Data Found",Toast.LENGTH_LONG).show();
+            if (!aBoolean) {
+                notFound.setVisibility(View.VISIBLE);
+                notFound.setText(getActivity().getText(R.string.place_not_found));
             }
             else {
+                notFound.setVisibility(View.GONE);
+                textView.setText(getActivity().getText(R.string.forecasting));
                 ForecastAdapter adapter = new ForecastAdapter(getActivity(),R.layout.forecast_list,list);
                 listView.setAdapter(adapter);
 
 
             }
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateCity(new SelectCity(getActivity()).getCity());
-
     }
 }

@@ -4,18 +4,19 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.dh.dhweather.views.Fragment_Current;
 import com.dh.dhweather.views.Fragment_Forecast;
@@ -60,8 +61,8 @@ public class WeatherActivity extends AppCompatActivity implements ActionBar.TabL
                 actionBar.setSelectedNavigationItem(position);
 
                 if (mViewPager.getCurrentItem() == 1) {
-                    Fragment_Forecast weatherFragment = (Fragment_Forecast) mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
-                    weatherFragment.onResume();
+                    Fragment_Forecast forecastFragment = (Fragment_Forecast) mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
+                    forecastFragment.changeCity();
                 }
             }
         });
@@ -79,26 +80,28 @@ public class WeatherActivity extends AppCompatActivity implements ActionBar.TabL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.newCity) {
-            showCityDialog();
-            return true;
+        switch (id) {
+            case R.id.newCity:
+                showCityDialog();
+                break;
+            case R.id.refresh:
+                refreshApp();
+                break;
         }
 
-        return false;
+        return true;
     }
+
 
     private void showCityDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -121,6 +124,20 @@ public class WeatherActivity extends AppCompatActivity implements ActionBar.TabL
             Fragment_Current weatherFragment = (Fragment_Current) mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
             weatherFragment.changeCity(city);
             new SelectCity(this).setCity(city);
+
+        }
+    }
+
+    private void refreshApp() {
+        if (mViewPager.getCurrentItem() == 0) {
+            Fragment_Current currentFragment = (Fragment_Current) mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
+            currentFragment.changeCity(new SelectCity(this).getCity());
+            Toast.makeText(WeatherActivity.this, "...Refresh successfully...", Toast.LENGTH_SHORT).show();
+        }
+        if (mViewPager.getCurrentItem() == 1) {
+            Fragment_Forecast forecastFragment = (Fragment_Forecast) mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
+            forecastFragment.changeCity();
+            Toast.makeText(WeatherActivity.this, "...Refresh successfully...", Toast.LENGTH_SHORT).show();
         }
     }
 
