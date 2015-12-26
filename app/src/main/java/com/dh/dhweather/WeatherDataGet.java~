@@ -9,8 +9,8 @@ import java.net.URL;
 
 
 public class WeatherDataGet {
-    private static final String CURRENT_WEATHER_CONDITION = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid=66799862bdef1dec478b674374b90f6b";
-    private static final String WEATHER_FORECAST="http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&mode=json&units=metric&cnt=7&appid=66799862bdef1dec478b674374b90f6b";
+    private static final String CURRENT_WEATHER_CONDITION = "http://api.openweathermap.org/data/2.5/weather?q=%s&units=metric";
+    private static final String WEATHER_FORECAST="http://api.openweathermap.org/data/2.5/forecast/daily?q=%s&mode=json&units=metric&cnt=7";
 
 
     public static JSONObject getWeatherJSON(String city){
@@ -19,6 +19,7 @@ public class WeatherDataGet {
             URL url = new URL(String.format(CURRENT_WEATHER_CONDITION,city));
 
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+            connection.addRequestProperty("x-api-key","bb6339ef414ea92c1b02014ccdacf41f");
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
