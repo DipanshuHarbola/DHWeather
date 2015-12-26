@@ -49,7 +49,6 @@ public class WeatherDataGet {
             URL url = new URL(String.format(WEATHER_FORECAST,city));
 
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.addRequestProperty("x-api-key","bb6339ef414ea92c1b02014ccdacf41f");
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
