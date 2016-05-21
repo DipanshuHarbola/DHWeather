@@ -3,6 +3,8 @@
     <color name="temp_color">#ff65b8e2</color>
     <color name="maxtemp">#eeedc649</color>
     <color name="mintemp">#ff10dcd7</color>
-    <color name="actionbar">#ff358c69</color>
-    <color name="statusbar">#ff377a55</color>
+    <color name="colorPrimary">#65b8e2</color>
+    <color name="colorPrimaryDark">#307da4</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

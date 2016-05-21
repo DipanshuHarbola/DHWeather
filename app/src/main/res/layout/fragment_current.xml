@@ -94,7 +94,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerVertical="true"
         android:text="@string/place_not_found"
-        android:textColor="@color/actionbar"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/details_textSize"
         android:visibility="gone" />
 </RelativeLayout>

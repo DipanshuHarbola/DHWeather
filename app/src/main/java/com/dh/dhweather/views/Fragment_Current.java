@@ -1,5 +1,6 @@
 package com.dh.dhweather.views;
 
+import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dh.dhweather.R;
 import com.dh.dhweather.SelectCity;
 import com.dh.dhweather.WeatherDataGet;
@@ -34,6 +36,7 @@ public class Fragment_Current extends Fragment {
     private TextView detailsField;
     private TextView deg;
     private TextView notFound;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +50,7 @@ public class Fragment_Current extends Fragment {
         detailsField = (TextView) rootView.findViewById(R.id.detailsView);
         deg = (TextView) rootView.findViewById(R.id.degree);
         notFound = (TextView)rootView.findViewById(R.id.notFound);
+        progressDialog = new ProgressDialog(getActivity());
         updateCity(new SelectCity(getActivity()).getCity());
         return rootView;
     }
@@ -55,7 +59,7 @@ public class Fragment_Current extends Fragment {
         new WeatherAsyncTask().execute(city);
     }
 
-    private Drawable loadImageFromWeb(String url) {
+    /*private Drawable loadImageFromWeb(String url) {
         Drawable drawable;
         try
         {
@@ -67,12 +71,20 @@ public class Fragment_Current extends Fragment {
         }
         return null;
     }
-
+*/
     public void changeCity(String city){
         updateCity(city);
     }
 
     public class WeatherAsyncTask extends AsyncTask<String,Void,Weather>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage("Loading...");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+        }
 
         @Override
         protected Weather doInBackground(String... params) {
@@ -82,7 +94,7 @@ public class Fragment_Current extends Fragment {
                 if (json!=null){
                     weather = WeatherDataSet.getWeatherData(json);
 
-                    weather.image=loadImageFromWeb("http://openweathermap.org/img/w/" + weather.getIcon() + ".png");
+                    //weather.image=loadImageFromWeb("http://openweathermap.org/img/w/" + weather.getIcon() + ".png");
                     return weather;
                 }
             } catch (JSONException e) {
@@ -102,10 +114,13 @@ public class Fragment_Current extends Fragment {
             else{
                 notFound.setVisibility(View.GONE);
                 try {
+                    progressDialog.dismiss();
                     cityField.setText(weather.getCity() + ", " + weather.getCountry());
 
 
-                    iconField.setImageDrawable(weather.image);
+                    Glide.with(getActivity())
+                            .load("http://openweathermap.org/img/w/" + weather.getIcon() + ".png").into(iconField);
+                    //iconField.setImageDrawable(weather.image);
 
                     descField.setText(weather.getDescription().toUpperCase(Locale.UK));
                     detailsField.setText("Humidity: " + weather.getHumidity() + "%" + "\n" +
@@ -120,6 +135,7 @@ public class Fragment_Current extends Fragment {
 
                 }catch (Exception e){
                     e.printStackTrace();
+                    progressDialog.dismiss();
                 }
             }
         }

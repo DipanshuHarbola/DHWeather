@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,41 +27,29 @@ import java.util.Locale;
 
 
 @SuppressWarnings("deprecation")
-public class WeatherActivity extends AppCompatActivity implements ActionBar.TabListener {
-
-
-    SectionsPagerAdapter mSectionsPagerAdapter;
-
-
-    ViewPager mViewPager;
+public class WeatherActivity extends AppCompatActivity {
+    private TabLayout tabs;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_weather);
-
-
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        if (Build.VERSION.SDK_INT >= 21)
-        {
-            getWindow().setStatusBarColor(getResources().getColor(R.color.statusbar));
-        }
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.actionbar)));
-
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-
+        //final ActionBar actionBar = getSupportActionBar();
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tabs = (TabLayout) findViewById(R.id.tabs);
         mViewPager = (ViewPager) findViewById(R.id.pager);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        tabs.setupWithViewPager(mViewPager);
 
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
-
                 if (mViewPager.getCurrentItem() == 1) {
                     Fragment_Forecast forecastFragment = (Fragment_Forecast) mViewPager.getAdapter().instantiateItem(mViewPager, mViewPager.getCurrentItem());
                     forecastFragment.changeCity();
@@ -67,14 +57,6 @@ public class WeatherActivity extends AppCompatActivity implements ActionBar.TabL
             }
         });
 
-
-        for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
-
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            .setTabListener(this));
-        }
     }
 
 
@@ -141,18 +123,6 @@ public class WeatherActivity extends AppCompatActivity implements ActionBar.TabL
         }
     }
 
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-        mViewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-    }
 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
