@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dh.dhweather.R;
@@ -18,6 +17,7 @@ import com.dh.dhweather.SelectCity;
 import com.dh.dhweather.WeatherDataGet;
 import com.dh.dhweather.WeatherDataSet;
 import com.dh.dhweather.beans.WeatherForecast;
+import com.dh.dhweather.ui.adapter.ForecastAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;

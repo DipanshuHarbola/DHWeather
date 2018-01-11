@@ -1,14 +1,11 @@
-package com.dh.dhweather.views;
+package com.dh.dhweather.ui.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.dh.dhweather.R;
 import com.dh.dhweather.beans.WeatherForecast;
 
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
