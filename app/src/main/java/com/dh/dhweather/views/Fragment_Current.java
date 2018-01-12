@@ -1,7 +1,6 @@
 package com.dh.dhweather.views;
 
 import android.app.ProgressDialog;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,15 +13,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dh.dhweather.R;
 import com.dh.dhweather.SelectCity;
-import com.dh.dhweather.WeatherDataGet;
 import com.dh.dhweather.WeatherDataSet;
 import com.dh.dhweather.beans.Weather;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -89,7 +85,7 @@ public class Fragment_Current extends Fragment {
         @Override
         protected Weather doInBackground(String... params) {
             Weather weather;
-            final JSONObject json = WeatherDataGet.getWeatherJSON(params[0]);
+            final JSONObject json = null;//WeatherDataGet.getWeatherJSON(params[0]);
             try {
                 if (json!=null){
                     weather = WeatherDataSet.getWeatherData(json);

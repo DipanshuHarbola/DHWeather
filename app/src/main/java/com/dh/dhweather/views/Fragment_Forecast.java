@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.dh.dhweather.R;
 import com.dh.dhweather.SelectCity;
-import com.dh.dhweather.WeatherDataGet;
 import com.dh.dhweather.WeatherDataSet;
 import com.dh.dhweather.beans.WeatherForecast;
 import com.dh.dhweather.ui.adapter.ForecastAdapter;
@@ -79,7 +78,7 @@ public class Fragment_Forecast extends Fragment {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            final JSONObject json = WeatherDataGet.getForecastJson(params[0]);
+            final JSONObject json = null; //WeatherDataGet.getForecastJson(params[0]);
             try {
                 if (json!=null) {
                     list = WeatherDataSet.getWeatherForecastData(json);
