@@ -1,18 +1,19 @@
 package com.dh.dhweather.services.api;
 
 
-import com.dh.dhweather.beans.Weather;
-import com.dh.dhweather.beans.WeatherForecast;
+import com.dh.dhweather.services.pojo.CurrentWeather;
+import com.dh.dhweather.services.pojo.ForecastWeather;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
-    @GET("users/{user}/repos")
-    Observable<Weather> getCurrentWeather(@Path("user") String userName);
+    @GET("weather")
+    Observable<CurrentWeather> getCurrentWeather(@Query("q") String locationName, @Query("units") String units, @Query("appid") String appid);
 
-    @GET("users/{user}/repos")
-    Observable<WeatherForecast> getForecastWeather(@Path("user") String userName);
+    @GET("forecast/daily")
+    Observable<ForecastWeather> getForecastWeather(@Query("q") String locationName, @Query("units") String units, @Query("mode") String mode, @Query("cnt") String count, @Query("appid") String appid);
 }

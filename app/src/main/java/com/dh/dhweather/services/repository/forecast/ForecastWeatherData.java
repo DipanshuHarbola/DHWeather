@@ -3,6 +3,7 @@ package com.dh.dhweather.services.repository.forecast;
 import com.dh.dhweather.beans.Weather;
 import com.dh.dhweather.beans.WeatherForecast;
 import com.dh.dhweather.services.api.ApiService;
+import com.dh.dhweather.services.pojo.ForecastWeather;
 import com.dh.dhweather.services.repository.current.CurrentWeatherDataSource;
 
 import javax.inject.Inject;
@@ -21,7 +22,7 @@ public class ForecastWeatherData implements ForecastWeatherDataSource {
     }
 
     @Override
-    public Observable<WeatherForecast> getForecastWeather(String locationName) {
-        return apiService.getForecastWeather(locationName);
+    public Observable<ForecastWeather> getForecastWeather(String locationName, String units, String mode, String count, String appId) {
+        return apiService.getForecastWeather(locationName, units, mode, count, appId);
     }
 }

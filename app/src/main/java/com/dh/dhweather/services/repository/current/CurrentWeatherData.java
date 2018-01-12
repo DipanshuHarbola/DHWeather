@@ -2,6 +2,7 @@ package com.dh.dhweather.services.repository.current;
 
 import com.dh.dhweather.beans.Weather;
 import com.dh.dhweather.services.api.ApiService;
+import com.dh.dhweather.services.pojo.CurrentWeather;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -19,7 +20,7 @@ public class CurrentWeatherData implements CurrentWeatherDataSource {
     }
 
     @Override
-    public Observable<Weather> getCurrentWeather(String locationName) {
-        return apiService.getCurrentWeather(locationName);
+    public Observable<CurrentWeather> getCurrentWeather(String locationName, String units, String appId) {
+        return apiService.getCurrentWeather(locationName, units, appId);
     }
 }
