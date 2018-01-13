@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.dh.dhweather.R;
 import com.dh.dhweather.SelectCity;
+import com.dh.dhweather.ui.base.BaseActivity;
 import com.dh.dhweather.views.Fragment_Current;
 import com.dh.dhweather.views.Fragment_Forecast;
 
@@ -25,7 +26,7 @@ import java.util.Locale;
 
 
 @SuppressWarnings("deprecation")
-public class WeatherActivity extends AppCompatActivity {
+public class WeatherActivity extends BaseActivity {
     private TabLayout tabs;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;

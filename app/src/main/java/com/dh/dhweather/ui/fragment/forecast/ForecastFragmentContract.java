@@ -5,11 +5,13 @@ import com.dh.dhweather.beans.Weather;
 import com.dh.dhweather.beans.WeatherForecast;
 import com.dh.dhweather.ui.base.BasePresenter;
 
+import java.util.List;
+
 public class ForecastFragmentContract {
 
     public interface View {
 
-        void updateData(WeatherForecast weatherForecast);
+        void updateData(List<WeatherForecast> weatherForecast);
 
         void showMessage(String msg);
 

@@ -9,4 +9,7 @@
     <string name="forecasting">Upcoming Days</string>
     <string name="unit">℃</string>
     <string name="refresh">Refresh</string>
+    <string name="forecast">Forecast</string>
+    <string name="forecast_data">Forecast Data</string>
+    <string name="weather_sunny">&#xf00d;</string>
 </resources>
