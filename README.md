@@ -6,9 +6,7 @@ This app shows current weather condition and six days weather forecasting.
 
    ![Screen-One](/screenshots/screenfive.gif)
 
-   ![Screen-Two](/screenshots/screenone.png)         ![Screen-Three](/screenshots/screentwo.png)
-
-   ![Screen-Four](/screenshots/screenthree.png)      ![Screen-Five](/screenshots/screenfour.png)
+![Screen-Two](/screenshots/screenone.png) ![Screen-Three](/screenshots/screentwo.png) ![Screen-Four](/screenshots/screenthree.png) ![Screen-Five](/screenshots/screenfour.png)
 
 
 #### Get an API key from Openweathermap.org to run the app.
