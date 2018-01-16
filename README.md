@@ -4,11 +4,11 @@ This app shows current weather condition and six days weather forecasting.
 
 ## MVP- Dagger2 + RxJava2 + RxAndroid2 + Retrofit2
 
-![Screen-One](/screenshots/screenfive.gif)
+                 ![Screen-One](/screenshots/screenfive.gif)
 
-![Screen-Two](/screenshots/screenone.png)  ![Screen-Three](/screenshots/screentwo.png)
+   ![Screen-Two](/screenshots/screenone.png)         ![Screen-Three](/screenshots/screentwo.png)
 
-![Screen-Four](/screenshots/screenthree.png)  ![Screen-Five](/screenshots/screenfour.png)
+   ![Screen-Four](/screenshots/screenthree.png)      ![Screen-Five](/screenshots/screenfour.png)
 
 
 #### Get an API key from Openweathermap.org to run the app.
