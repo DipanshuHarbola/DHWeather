@@ -2,6 +2,7 @@ package com.dh.dhweather.di;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 
 import com.dh.dhweather.WeatherApp;
@@ -23,6 +24,12 @@ public class AppModule {
     @Provides
     Context provideContext(WeatherApp application) {
         return application.getApplicationContext();
+    }
+
+    @Singleton
+    @Provides
+    Typeface provideTypeface(Context context){
+        return Typeface.createFromAsset(context.getAssets(),"fonts/weathericons.ttf");
     }
 
     @Singleton

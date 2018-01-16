@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="temp_color">#ff65b8e2</color>
-    <color name="maxtemp">#eeedc649</color>
-    <color name="mintemp">#ff10dcd7</color>
-    <color name="colorPrimary">#65b8e2</color>
-    <color name="colorPrimaryDark">#307da4</color>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorDeepPurple">#6200ea</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorOrange">#ff7043</color>
+    <color name="colorDeepPurpleAccent">#660ec7</color>
 </resources>

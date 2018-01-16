@@ -1,8 +1,6 @@
 package com.dh.dhweather.services.repository.forecast;
 
 
-import com.dh.dhweather.beans.Weather;
-import com.dh.dhweather.beans.WeatherForecast;
 import com.dh.dhweather.services.pojo.ForecastWeather;
 
 import io.reactivex.Observable;

@@ -1,6 +1,5 @@
 package com.dh.dhweather.services.repository.current;
 
-import com.dh.dhweather.beans.Weather;
 import com.dh.dhweather.services.api.ApiService;
 import com.dh.dhweather.services.pojo.CurrentWeather;
 

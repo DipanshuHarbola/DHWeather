@@ -1,10 +1,7 @@
 package com.dh.dhweather.services.repository.forecast;
 
-import com.dh.dhweather.beans.Weather;
-import com.dh.dhweather.beans.WeatherForecast;
 import com.dh.dhweather.services.api.ApiService;
 import com.dh.dhweather.services.pojo.ForecastWeather;
-import com.dh.dhweather.services.repository.current.CurrentWeatherDataSource;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

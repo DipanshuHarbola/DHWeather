@@ -1,79 +1,91 @@
 package com.dh.dhweather.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.dh.dhweather.R;
-import com.dh.dhweather.beans.WeatherForecast;
+import com.dh.dhweather.ui.fragment.WeatherForecast;
+import com.dh.dhweather.utils.WeatherIcons;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.MyViewHolder> {
 
-    ArrayList<WeatherForecast> objects;
-    int resource;
-    Context context;
+    private Context mContext;
+    private Typeface typeface;
+    private List<WeatherForecast> forecastData = new ArrayList<>();
 
-    public ForecastAdapter(Context context, int resource, ArrayList<WeatherForecast> objects) {
-        this.context=context;
-        this.resource= resource;
-        this.objects= objects;
-        Log.e("inside","ForecastAdapter");
+    public ForecastAdapter(Context context, Typeface typeface) {
+        this.mContext = context;
+        this.typeface = typeface;
+    }
+
+    public void setForecastData(List<WeatherForecast> data) {
+        if (data == null) {
+            return;
+        }
+        forecastData.clear();
+        forecastData.addAll(data);
+        notifyDataSetChanged();
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(resource, parent, false);
-        Log.e("inside","MyViewHolder");
+        View v = LayoutInflater.from(mContext).inflate(R.layout.forecast_list, parent, false);
         return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Log.e("inside","onBindViewHolder");
-        Glide.with(context)
-                .load("http://openweathermap.org/img/w/" + objects.get(position).getIcon() + ".png").into(holder.icon);
-        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("EEEE", Locale.getDefault());
-        String todayIs = simpleDateFormat.format(new Date(objects.get(position).getDay() * 1000));
-        DateFormat df = DateFormat.getDateInstance();
-        String date = df.format(new Date(objects.get(position).getDay() * 1000));
-        holder.today.setText(todayIs+" "+date);
-        holder.maxTemp.setText(String.format("%.2f", objects.get(position).getMaxTemp())+"\u00B0");
-        holder.minTemp.setText(String.format("%.2f",objects.get(position).getMinTemp())+"\u00B0");
-        holder.desc.setText(objects.get(position).getDescription());
+        holder.bindViews(mContext,forecastData.get(position),typeface);
     }
 
     @Override
     public int getItemCount() {
-        return objects.size();
+        return forecastData.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView today;
-        public TextView maxTemp;
-        public TextView minTemp;
-        public TextView desc;
-        public ImageView icon;
 
-        public MyViewHolder(View view){
+        @BindView(R.id.txt_date)
+        TextView txtDate;
+        @BindView(R.id.txt_image_font)
+        TextView txtImageFont;
+        @BindView(R.id.txt_tmp_max)
+        TextView txtTmpMax;
+        @BindView(R.id.txt_tmp_min)
+        TextView txtTmpMin;
+        @BindView(R.id.txt_description)
+        TextView txtDescription;
+
+        public MyViewHolder(View view) {
             super(view);
-            today = (TextView) view.findViewById(R.id.today);
-            maxTemp = (TextView) view.findViewById(R.id.maxTemp);
-            minTemp = (TextView) view.findViewById(R.id.minTemp);
-            desc = (TextView) view.findViewById(R.id.desc);
-            icon = (ImageView) view.findViewById(R.id.icon);
+            ButterKnife.bind(this,view);
+        }
+
+        public void bindViews(Context mContext, WeatherForecast forecast, Typeface typeface){
+            DateFormat format = new SimpleDateFormat("EEEE dd MMM yyyy", Locale.getDefault());
+            String date = format.format(new Date(forecast.getDay()*1000));
+            txtDate.setText(date);
+            txtImageFont.setTypeface(typeface);
+            txtImageFont.setText(WeatherIcons.setWeatherIcon(mContext,forecast.getIconId(),2));
+            txtTmpMax.setText(String.format("%s %s",String.valueOf(forecast.getMaxTemp()),mContext.getString(R.string.unit)));
+            txtTmpMin.setText(String.format("%s %s",String.valueOf(forecast.getMinTemp()),mContext.getString(R.string.unit)));
+            txtDescription.setText(forecast.getDescription());
         }
     }
 

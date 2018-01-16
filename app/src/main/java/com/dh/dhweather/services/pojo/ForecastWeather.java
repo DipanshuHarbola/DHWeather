@@ -18,15 +18,15 @@ public class ForecastWeather {
 
     public class WeatherList {
 
-        private Integer dt;
+        private Long dt;
         private Temp temp;
-        private java.util.List<Weather> weather = null;
+        private List<Weather> weather = null;
 
-        public Integer getDt() {
+        public Long getDt() {
             return dt;
         }
 
-        public void setDt(Integer dt) {
+        public void setDt(Long dt) {
             this.dt = dt;
         }
 
@@ -38,11 +38,11 @@ public class ForecastWeather {
             this.temp = temp;
         }
 
-        public java.util.List<Weather> getWeather() {
+        public List<Weather> getWeather() {
             return weather;
         }
 
-        public void setWeather(java.util.List<Weather> weather) {
+        public void setWeather(List<Weather> weather) {
             this.weather = weather;
         }
 
@@ -51,22 +51,22 @@ public class ForecastWeather {
 
     public class Temp {
 
-        private Integer min;
-        private Integer max;
+        private Double min;
+        private Double max;
 
-        public Integer getMin() {
+        public Double getMin() {
             return min;
         }
 
-        public void setMin(Integer min) {
+        public void setMin(Double min) {
             this.min = min;
         }
 
-        public Integer getMax() {
+        public Double getMax() {
             return max;
         }
 
-        public void setMax(Integer max) {
+        public void setMax(Double max) {
             this.max = max;
         }
 

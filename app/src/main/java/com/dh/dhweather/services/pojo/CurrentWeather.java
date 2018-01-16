@@ -1,14 +1,17 @@
 package com.dh.dhweather.services.pojo;
 
 
+import android.graphics.Typeface;
+
 import java.util.List;
 
 public class CurrentWeather {
 
     private List<Weather> weather = null;
     private Main main;
-    private Integer dt;
+    private Long dt;
     private Sys sys;
+    private Wind wind;
     private String name;
 
     public List<Weather> getWeather() {
@@ -27,11 +30,11 @@ public class CurrentWeather {
         this.main = main;
     }
 
-    public Integer getDt() {
+    public Long getDt() {
         return dt;
     }
 
-    public void setDt(Integer dt) {
+    public void setDt(Long dt) {
         this.dt = dt;
     }
 
@@ -41,6 +44,14 @@ public class CurrentWeather {
 
     public void setSys(Sys sys) {
         this.sys = sys;
+    }
+
+    public Wind getWind() {
+        return wind;
+    }
+
+    public void setWind(Wind wind) {
+        this.wind = wind;
     }
 
     public String getName() {
@@ -91,21 +102,27 @@ public class CurrentWeather {
             this.icon = icon;
         }
 
+        @Override
+        public String toString() {
+            return "Weather{" +
+                    "id=" + id +
+                    ", main='" + main + '\'' +
+                    ", description='" + description + '\'' +
+                    ", icon='" + icon + '\'' +
+                    '}';
+        }
     }
 
     public class Main {
-        private Integer temp;
+        private Double temp;
         private Integer pressure;
         private Integer humidity;
-        private Integer tempMin;
 
-        private Integer tempMax;
-
-        public Integer getTemp() {
+        public Double getTemp() {
             return temp;
         }
 
-        public void setTemp(Integer temp) {
+        public void setTemp(Double temp) {
             this.temp = temp;
         }
 
@@ -125,23 +142,15 @@ public class CurrentWeather {
             this.humidity = humidity;
         }
 
-        public Integer getTempMin() {
-            return tempMin;
+
+        @Override
+        public String toString() {
+            return "Main{" +
+                    "temp=" + temp +
+                    ", pressure=" + pressure +
+                    ", humidity=" + humidity +
+                    '}';
         }
-
-        public void setTempMin(Integer tempMin) {
-            this.tempMin = tempMin;
-        }
-
-        public Integer getTempMax() {
-            return tempMax;
-        }
-
-        public void setTempMax(Integer tempMax) {
-            this.tempMax = tempMax;
-        }
-
-
     }
 
     public class Sys {
@@ -154,6 +163,35 @@ public class CurrentWeather {
 
         public void setCountry(String country) {
             this.country = country;
+        }
+
+        @Override
+        public String toString() {
+            return "Sys{country=" + country + "}";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "CurrentWeather{" +
+                "weather=" + weather +
+                ", main=" + main +
+                ", dt=" + dt +
+                ", sys=" + sys +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    public class Wind {
+
+        private Double speed;
+
+        public Double getSpeed() {
+            return speed;
+        }
+
+        public void setSpeed(Double speed) {
+            this.speed = speed;
         }
 
 

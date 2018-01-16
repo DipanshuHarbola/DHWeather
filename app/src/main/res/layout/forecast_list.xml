@@ -4,81 +4,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="6dp"
+    app:cardCornerRadius="4dp"
     app:cardUseCompatPadding="true">
 
-    <RelativeLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/activity_vertical_margin" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/today"
-            android:text="Saturday 13-01-2018"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <ImageView
-            android:layout_width="@dimen/icon_width"
-            android:layout_height="@dimen/icon_height"
-            android:id="@+id/icon"
-            android:layout_marginTop="@dimen/for_icon_marginTop"
-            android:layout_below="@+id/today"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginStart="@dimen/for_icon_marginLeft"
-            android:layout_marginLeft="@dimen/for_icon_marginLeft" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawable_back_forecast">
 
 
         <TextView
+            android:id="@+id/txt_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/maxTemp"
-            android:textSize="@dimen/max_min_temp_textSize"
-            android:textColor="@color/maxtemp"
-            android:layout_alignTop="@+id/icon"
-            android:layout_toRightOf="@+id/icon"
-            android:layout_toEndOf="@+id/icon"
-            android:text="26"
-            android:layout_marginTop="@dimen/max_min_temp_marginTop"
-            android:layout_marginStart="@dimen/max_min_temp_marginLeft"
-            android:layout_marginLeft="@dimen/max_min_temp_marginLeft"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txt_image_font"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/minTemp"
-            android:textSize="@dimen/max_min_temp_textSize"
-            android:textColor="@color/mintemp"
-            android:layout_alignTop="@+id/icon"
-            android:layout_toRightOf="@+id/maxTemp"
-            android:layout_toEndOf="@+id/maxTemp"
-            android:text="22"
-            android:layout_marginTop="@dimen/max_min_temp_marginTop"
-            android:layout_marginStart="@dimen/max_min_temp_marginLeft"
-            android:layout_marginLeft="@dimen/max_min_temp_marginLeft"/>
+            android:layout_marginStart="36dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="24dp"
+            android:textColor="@android:color/white"
+            android:textSize="50sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_date" />
 
         <TextView
+            android:id="@+id/txt_tmp_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/desc"
-            android:textSize="@dimen/desc_textSize"
-            android:layout_below="@+id/maxTemp"
-            android:layout_toRightOf="@+id/icon"
-            android:layout_toEndOf="@+id/icon"
-            android:text="Clear Sky"
-            android:layout_marginTop="@dimen/for_desc_marginTop"
-            android:layout_marginStart="@dimen/for_desc_marginLeft"
-            android:layout_marginLeft="@dimen/for_desc_marginLeft" />
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:textColor="@android:color/white"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/txt_tmp_min"
+            app:layout_constraintHorizontal_bias="0.648"
+            app:layout_constraintStart_toEndOf="@+id/txt_image_font"
+            app:layout_constraintTop_toBottomOf="@+id/txt_date" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/txt_tmp_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginRight="60dp"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_tmp_max"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_image_font" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>
