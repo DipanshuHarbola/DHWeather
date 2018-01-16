@@ -171,9 +171,9 @@ public class WeatherFragment extends BaseFragment implements WeatherFragmentCont
         txtImgHumidity.setText(getString(R.string.humidity_icon));
         txtImgPressure.setTypeface(typeface);
         txtImgPressure.setText(getString(R.string.pressure_icon));
-        txtWindSpeed.setText(String.format("%s m/s", weather.getWind().getSpeed()));
-        txtHumidity.setText(String.format("%s %s", weather.getMain().getHumidity(), "%"));
-        txtPressure.setText(String.format("%s hpa", weather.getMain().getPressure()));
+        txtWindSpeed.setText(String.format("%s m/s", String.valueOf(weather.getWind().getSpeed())));
+        txtHumidity.setText(String.format("%s %s", String.valueOf(weather.getMain().getHumidity()), "%"));
+        txtPressure.setText(String.format("%s hpa", String.valueOf(weather.getMain().getPressure())));
     }
 
     @Override

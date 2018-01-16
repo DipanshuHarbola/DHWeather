@@ -74,7 +74,7 @@ public class ImpWeatherFragmentPresenter implements WeatherFragmentContract.Pres
                     public void onError(Throwable t) {
                         Log.e(TAG, t.getMessage());
                         try {
-                            String erroeJson = ((HttpException)t).response().errorBody().source().readUtf8();
+                            String erroeJson = ((retrofit2.adapter.rxjava2.HttpException)t).response().errorBody().source().readUtf8();
                             JSONObject jsonObject = new JSONObject(erroeJson);
                             String errorMessage = jsonObject.getString("message");
                             mWeatherFragmentView.showMessage(errorMessage);

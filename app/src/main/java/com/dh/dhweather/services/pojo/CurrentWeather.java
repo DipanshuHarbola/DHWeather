@@ -115,7 +115,7 @@ public class CurrentWeather {
 
     public class Main {
         private Double temp;
-        private Integer pressure;
+        private Double pressure;
         private Integer humidity;
 
         public Double getTemp() {
@@ -126,11 +126,11 @@ public class CurrentWeather {
             this.temp = temp;
         }
 
-        public Integer getPressure() {
+        public Double getPressure() {
             return pressure;
         }
 
-        public void setPressure(Integer pressure) {
+        public void setPressure(Double pressure) {
             this.pressure = pressure;
         }
 
