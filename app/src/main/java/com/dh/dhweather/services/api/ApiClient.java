@@ -13,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/";
-    private static final String APP_ID = "66799862bdef1dec478b674374b90f6b";
 
     public static ApiService getOpenWeatherMapService(Application application) {
 

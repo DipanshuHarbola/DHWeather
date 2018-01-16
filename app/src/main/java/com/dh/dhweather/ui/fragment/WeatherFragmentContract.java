@@ -2,7 +2,6 @@ package com.dh.dhweather.ui.fragment;
 
 
 import com.dh.dhweather.services.pojo.CurrentWeather;
-import com.dh.dhweather.services.pojo.ForecastWeather;
 import com.dh.dhweather.ui.base.BasePresenter;
 import com.dh.dhweather.ui.base.BaseView;
 

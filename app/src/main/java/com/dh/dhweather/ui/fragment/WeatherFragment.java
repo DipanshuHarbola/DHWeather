@@ -15,7 +15,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,7 +91,6 @@ public class WeatherFragment extends BaseFragment implements WeatherFragmentCont
     Unbinder unbinder;
 
     private ForecastAdapter adapter;
-    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -125,7 +123,7 @@ public class WeatherFragment extends BaseFragment implements WeatherFragmentCont
     }
 
     private void initBottomSheet() {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
 
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
